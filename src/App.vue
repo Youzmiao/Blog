@@ -1,17 +1,18 @@
 <template>
-  <div class="mx-auto my-auto max-w-7xl px-4 mt-6 sm:px-6 lg:px-8 shadow-lg bg-red-300">
-    <p>Hello World
+  <div class="relative w-full h-screen overflow-hidden bg-gray-900 flex items-center justify-center">
+    <!-- Home -->
+    <div class="  absolute bg-red-600">
       
-    </p>
+    </div>
   </div>
 </template>
- 
- 
+
+
 <script setup>
- 
+import Header from './components/Header.vue'; 
+import Sidebar from './components/Sidebar.vue';
+import MainContent from './components/MainContent.vue';
 </script>
- 
- 
-<style scoped>
- 
-</style>
+
+
+<style scoped></style>
