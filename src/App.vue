@@ -1,18 +1,48 @@
+<!-- App.vue -->
 <template>
-  <div class="relative w-full h-screen overflow-hidden bg-gray-900 flex items-center justify-center">
-    <!-- Home -->
-    <div class="  absolute bg-red-600">
-      
-    </div>
-  </div>
+  <div class="min-h-screen  bg-center bg-fixed" 
+  :style="{ backgroundImage: `url(${bgImage})` }">
+    <Navigation :isScrolledPastNav="isScrolledPastNav" />
+    <HeroSection id="hero" />
+    <AboutSection id="about" />
+    <ProjectsSection id="projects" />
+    <BlogSection id="blog" />
+    <ContactSection id="contact" />
+  </div> 
 </template>
 
-
 <script setup>
-import Header from './components/Header.vue'; 
-import Sidebar from './components/Sidebar.vue';
-import MainContent from './components/MainContent.vue';
+import { ref, onMounted, onUnmounted } from 'vue'
+import HeroSection from './components/Hero.vue'
+import Navigation from './components/Navigation.vue'
+import AboutSection from './components/About.vue'
+import ProjectsSection from './components/Projects.vue'
+import BlogSection from './components/Blog.vue'
+import ContactSection from './components/Contact.vue'
+
+import bgImage from './assets/bg.jpg'
+const isScrolledPastNav = ref(false)
+
+onMounted(() => {
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      isScrolledPastNav.value = !entry.isIntersecting
+    },
+    {
+      rootMargin: "-80px 0px 0px 0px",
+      threshold: 0
+    }
+  )
+
+  const heroSection = document.querySelector('#hero')
+  if (heroSection) {
+    observer.observe(heroSection)
+  }
+
+  onUnmounted(() => {
+    if (heroSection) {
+      observer.unobserve(heroSection)
+    }
+  })
+})
 </script>
-
-
-<style scoped></style>
